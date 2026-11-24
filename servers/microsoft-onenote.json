@@ -1,0 +1,97 @@
+{
+  "server": {
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+    "name": "io.github.streaik/Microsoft-OneNote",
+    "title": "Microsoft OneNote",
+    "description": "List OneNote notebooks using delegated Microsoft Graph access.",
+    "version": "1.0.0",
+    "repository": {
+      "source": "github",
+      "url": "https://github.com/Streaik/streaik-mcp-servers"
+    },
+    "remotes": [
+      {
+        "type": "streamable-http",
+        "url": "https://default-mcp-host.invalid/microsoft-onenote"
+      }
+    ],
+    "websiteUrl": "https://m365.cloud.microsoft/launch/onenote",
+    "icons": [
+      {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Microsoft_OneNote_Icon_%282025_-_present%29.svg/960px-Microsoft_OneNote_Icon_%282025_-_present%29.svg.png"
+      }
+    ]
+  },
+  "capabilities": {
+    "resources": [
+      {
+        "uri": "https://graph.microsoft.com/beta/me/onenote/notebooks",
+        "name": "my-onenote-notebooks",
+        "title": "My OneNote Notebooks",
+        "description": "Lists the notebooks the current user has access to.",
+        "mimeType": "application/json",
+        "annotations": {
+          "audience": [
+            "assistant",
+            "user"
+          ]
+        }
+      },
+      {
+        "uri": "https://graph.microsoft.com/beta/me/onenote/pages",
+        "name": "my-onenote-pages",
+        "title": "My OneNote Pages",
+        "description": "Lists all OneNote pages for the signed-in user.",
+        "mimeType": "application/json",
+        "annotations": {
+          "audience": [
+            "assistant",
+            "user"
+          ]
+        }
+      }
+    ],
+    "resourceTemplates": [
+      {
+        "uriTemplate": "https://graph.microsoft.com/beta/me/onenote/pages/{page-id}/content",
+        "name": "onenote-page-content",
+        "title": "OneNote Page Content",
+        "description": "Gets the HTML content of a specific OneNote page.",
+        "mimeType": "text/plain",
+        "annotations": {
+          "audience": [
+            "assistant"
+          ]
+        }
+      },
+      {
+        "uriTemplate": "https://graph.microsoft.com/beta/me/onenote/sections/{section-id}/pages",
+        "name": "onenote-pages-in-section",
+        "title": "List pages in a section",
+        "description": "List all pages in a specific section by section id.",
+        "mimeType": "application/json",
+        "annotations": {
+          "audience": [
+            "assistant"
+          ]
+        }
+      },
+      {
+        "uriTemplate": "https://graph.microsoft.com/beta/me/onenote/pages/{page-id}/content",
+        "name": "onenote-page-html",
+        "title": "Get page HTML",
+        "description": "Fetch the HTML content for a OneNote page by id.",
+        "mimeType": "text/plain",
+        "annotations": {
+          "audience": [
+            "assistant"
+          ]
+        }
+      }
+    ],
+    "prompts": []
+  },
+  "obo": {
+    "graph.microsoft.com": "https://graph.microsoft.com/Notes.Read"
+  }
+}
