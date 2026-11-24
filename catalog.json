@@ -1,0 +1,92 @@
+{
+  "servers": [
+    {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+      "name": "io.github.streaik/OpenAI-Images",
+      "title": "OpenAI Images",
+      "description": "Generate, edit, and ask questions about images.",
+      "version": "1.0.0",
+      "repository": {
+        "source": "github",
+        "url": "https://github.com/Streaik/streaik-mcp-servers"
+      },
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://default-mcp-host.invalid/openai-images",
+          "headers": [
+            {
+              "name": "Authorization",
+              "description": "OpenAI bearer authentication.",
+              "isRequired": true,
+              "value": "Bearer {openai_api_key}",
+              "variables": {
+                "openai_api_key": {
+                  "description": "Your OpenAI API key",
+                  "format": "string",
+                  "isRequired": true,
+                  "isSecret": true,
+                  "placeholder": "Enter your OpenAI API key"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+      "name": "io.github.streaik/Google-Images",
+      "title": "Google Images",
+      "description": "Generate, edit, and ask questions about images with Gemini.",
+      "version": "1.0.0",
+      "repository": {
+        "source": "github",
+        "url": "https://github.com/Streaik/streaik-mcp-servers"
+      },
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://default-mcp-host.invalid/google-images",
+          "headers": [
+            {
+              "name": "x-goog-api-key",
+              "description": "Your Gemini API key",
+              "format": "string",
+              "isRequired": true,
+              "isSecret": true,
+              "placeholder": "Enter your Gemini API key"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+      "name": "io.github.streaik/Anthropic-Skills",
+      "title": "Anthropic Skills",
+      "description": "List and inspect Anthropic skills without modifying them.",
+      "version": "1.0.0",
+      "repository": {
+        "source": "github",
+        "url": "https://github.com/Streaik/streaik-mcp-servers"
+      },
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://default-mcp-host.invalid/anthropic-skills",
+          "headers": [
+            {
+              "name": "x-api-key",
+              "description": "Your Anthropic API key",
+              "format": "string",
+              "isRequired": true,
+              "isSecret": true,
+              "placeholder": "Enter your Anthropic API key"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
