@@ -2,7 +2,7 @@
   "servers": [
     {
       "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
-      "name": "OpenAI-Images",
+      "name": "io.github.streaik/OpenAI-Images",
       "title": "OpenAI Images",
       "description": "Generate, edit, and ask questions about images.",
       "version": "1.0.0",
@@ -36,7 +36,7 @@
     },
     {
       "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
-      "name": "Google-Images",
+      "name": "io.github.streaik/Google-Images",
       "title": "Google Images",
       "description": "Generate, edit, and ask questions about images with Gemini.",
       "version": "1.0.0",
@@ -63,7 +63,7 @@
     },
     {
       "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
-      "name": "Anthropic-Skills",
+      "name": "io.github.streaik/Anthropic-Skills",
       "title": "Anthropic Skills",
       "description": "List and inspect Anthropic skills without modifying them.",
       "version": "1.0.0",
