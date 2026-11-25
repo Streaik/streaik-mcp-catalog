@@ -10,6 +10,8 @@ const expected = new Map([
   ['io.github.streaik/OpenAI-Images', ['/openai-images', 'Authorization']],
   ['io.github.streaik/Google-Images', ['/google-images', 'x-goog-api-key']],
   ['io.github.streaik/Anthropic-Skills', ['/anthropic-skills', 'x-api-key']],
+  ['io.github.streaik/GitHub-RESTCountries', ['/github-rest-countries']],
+  ['io.github.streaik/ModelContext-Utils', ['/modelcontext-utils']],
   ['io.github.streaik/Microsoft-OutlookCalendar', ['/microsoft-outlook-calendar']],
   ['io.github.streaik/Microsoft-OutlookMail', ['/microsoft-outlook-mail']],
   ['io.github.streaik/Microsoft-OneNote', ['/microsoft-onenote']],
@@ -20,10 +22,12 @@ test('catalog carries one complete registry document per built-in route', () => 
   assert.equal(entries.length, expected.size);
   for (const entry of entries) {
     const { file, server, capabilities, obo } = entry;
-    const [path, header] = expected.get(server.name);
+    const [path] = expected.get(server.name);
+    const graph = path.startsWith('/microsoft-');
+    const hasInstructions = path === '/modelcontext-utils';
     assert.equal(file, `${path.slice(1)}.json`);
-    assert.deepEqual(Object.keys(entry), ['file', 'server', 'capabilities', ...(header ? [] : ['obo'])]);
-    if (obo) {
+    assert.deepEqual(Object.keys(entry), ['file', 'server', 'capabilities', ...(graph ? ['obo'] : []), ...(hasInstructions ? ['instructions'] : [])]);
+    if (graph) {
       assert.deepEqual(Object.keys(obo), ['graph.microsoft.com']);
       for (const scope of obo['graph.microsoft.com'].split(' ')) assert.match(scope, /^https:\/\/graph\.microsoft\.com\/[A-Z][\w.]+$/);
     }
@@ -49,15 +53,16 @@ test('headers declare required secret inputs, without publishing credential valu
     for (const field of ['value', 'default', 'choices']) assert.ok(!(field in input));
   }
 
-  for (const { server, obo } of entries) {
+  for (const { server } of entries) {
     const { headers } = server.remotes[0];
-    if (obo) {
+    const [, expectedHeader] = expected.get(server.name);
+    if (!expectedHeader) {
       assert.equal(headers, undefined);
       continue;
     }
     assert.equal(headers.length, 1);
     const [header] = headers;
-    assert.equal(header.name, expected.get(server.name)[1]);
+    assert.equal(header.name, expectedHeader);
     if (header.name === 'Authorization') {
       assert.equal(header.isRequired, true);
       assert.equal(header.value, 'Bearer {openai_api_key}');
@@ -71,18 +76,20 @@ test('headers declare required secret inputs, without publishing credential valu
   }
 });
 
-test('Graph capabilities match the imported AI Happey contracts, except the omitted widget', async t => {
+test('ported capabilities match the AI Happey contracts, except omitted widgets', async t => {
   // The source checkout is optional; builds and ordinary catalog validation don't depend on it.
   const sourceEnv = process.env.AIHAPPEY_MCP_SOURCE;
   if (!sourceEnv) return t.skip('Set AIHAPPEY_MCP_SOURCE to the legacy Servers folder for migration parity testing.');
   const { join } = await import('node:path');
-  for (const { server, capabilities, obo } of entries) {
-    if (!obo) continue;
+  for (const { server, capabilities, obo, instructions } of entries) {
+    const name = server.name.split('/').at(-1);
+    if (!obo && !['GitHub-RESTCountries', 'ModelContext-Utils'].includes(name)) continue;
     const base = join(sourceEnv, server.name.split('/').at(-1));
     const load = async (file, key) => JSON.parse(await readFile(join(base, file), 'utf8'))[key];
-    assert.deepEqual(capabilities.resources, (await load('Resources.json', 'resources')).filter(resource => !resource.uri.startsWith('ui://')));
-    assert.deepEqual(capabilities.resourceTemplates, await load('ResourceTemplates.json', 'resourceTemplates'));
-    const prompts = await load('Prompts.json', 'prompts').catch(error => { if (error.code === 'ENOENT') return []; throw error; });
-    assert.deepEqual(capabilities.prompts, prompts);
+    const optional = (file, key) => load(file, key).catch(error => { if (error.code === 'ENOENT') return []; throw error; });
+    assert.deepEqual(capabilities.resources, (await optional('Resources.json', 'resources')).filter(resource => !resource.uri.startsWith('ui://')));
+    assert.deepEqual(capabilities.resourceTemplates, await optional('ResourceTemplates.json', 'resourceTemplates'));
+    assert.deepEqual(capabilities.prompts, await optional('Prompts.json', 'prompts'));
+    if (name === 'ModelContext-Utils') assert.equal(instructions, await load('Server.json', 'instructions'));
   }
 });
