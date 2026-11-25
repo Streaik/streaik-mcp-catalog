@@ -1,7 +1,7 @@
 {
   "server": {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
-    "name": "io.github.streaik/Microsoft-OneNote",
+    "name": "invalid.default-mcp-host/Microsoft-OneNote",
     "title": "Microsoft OneNote",
     "description": "List OneNote notebooks using delegated Microsoft Graph access.",
     "version": "1.0.0",

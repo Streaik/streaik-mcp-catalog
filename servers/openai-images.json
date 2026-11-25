@@ -1,7 +1,7 @@
 {
   "server": {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
-    "name": "io.github.streaik/OpenAI-Images",
+    "name": "invalid.default-mcp-host/OpenAI-Images",
     "title": "OpenAI Images",
     "description": "Generate, edit, and ask questions about images.",
     "version": "1.0.0",

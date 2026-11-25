@@ -1,7 +1,7 @@
 {
   "server": {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
-    "name": "io.github.streaik/Microsoft-OutlookMail",
+    "name": "invalid.default-mcp-host/Microsoft-OutlookMail",
     "title": "Microsoft Outlook Mail",
     "description": "Read recent inbox message summaries using delegated Microsoft Graph access.",
     "version": "1.0.0",

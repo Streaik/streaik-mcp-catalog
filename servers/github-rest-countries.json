@@ -1,7 +1,7 @@
 {
   "server": {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
-    "name": "io.github.streaik/GitHub-RESTCountries",
+    "name": "invalid.default-mcp-host/GitHub-RESTCountries",
     "title": "GitHub RESTCountries.NET",
     "version": "1.0.0",
     "websiteUrl": "https://github.com/egbakou/RESTCountries.NET",

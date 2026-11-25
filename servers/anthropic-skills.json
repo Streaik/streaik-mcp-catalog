@@ -1,7 +1,7 @@
 {
   "server": {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
-    "name": "io.github.streaik/Anthropic-Skills",
+    "name": "invalid.default-mcp-host/Anthropic-Skills",
     "title": "Anthropic Skills",
     "description": "List and inspect Anthropic skills without modifying them.",
     "version": "1.0.0",

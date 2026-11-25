@@ -7,14 +7,14 @@ const entries = await Promise.all((await readdir(folder)).map(async file => ({
   file, ...JSON.parse(await readFile(new URL(file, folder), 'utf8')),
 })));
 const expected = new Map([
-  ['io.github.streaik/OpenAI-Images', ['/openai-images', 'Authorization']],
-  ['io.github.streaik/Google-Images', ['/google-images', 'x-goog-api-key']],
-  ['io.github.streaik/Anthropic-Skills', ['/anthropic-skills', 'x-api-key']],
-  ['io.github.streaik/GitHub-RESTCountries', ['/github-rest-countries']],
-  ['io.github.streaik/ModelContext-Utils', ['/modelcontext-utils']],
-  ['io.github.streaik/Microsoft-OutlookCalendar', ['/microsoft-outlook-calendar']],
-  ['io.github.streaik/Microsoft-OutlookMail', ['/microsoft-outlook-mail']],
-  ['io.github.streaik/Microsoft-OneNote', ['/microsoft-onenote']],
+  ['invalid.default-mcp-host/OpenAI-Images', ['/openai-images', 'Authorization']],
+  ['invalid.default-mcp-host/Google-Images', ['/google-images', 'x-goog-api-key']],
+  ['invalid.default-mcp-host/Anthropic-Skills', ['/anthropic-skills', 'x-api-key']],
+  ['invalid.default-mcp-host/GitHub-RESTCountries', ['/github-rest-countries']],
+  ['invalid.default-mcp-host/ModelContext-Utils', ['/modelcontext-utils']],
+  ['invalid.default-mcp-host/Microsoft-OutlookCalendar', ['/microsoft-outlook-calendar']],
+  ['invalid.default-mcp-host/Microsoft-OutlookMail', ['/microsoft-outlook-mail']],
+  ['invalid.default-mcp-host/Microsoft-OneNote', ['/microsoft-onenote']],
 ]);
 
 test('catalog carries one complete registry document per built-in route', () => {

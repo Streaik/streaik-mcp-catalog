@@ -1,7 +1,7 @@
 {
   "server": {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
-    "name": "io.github.streaik/ModelContext-Utils",
+    "name": "invalid.default-mcp-host/ModelContext-Utils",
     "title": "ModelContext Utils",
     "version": "1.0.0",
     "description": "Test MCP servers: inspect tools, validate resource templates and run checks efficiently.",

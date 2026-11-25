@@ -1,7 +1,7 @@
 {
   "server": {
     "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
-    "name": "io.github.streaik/Google-Images",
+    "name": "invalid.default-mcp-host/Google-Images",
     "title": "Google Images",
     "description": "Generate, edit, and ask questions about images with Gemini.",
     "version": "1.0.0",
